@@ -46,17 +46,19 @@ function Todo() {
         const updatedTasks = tasks.filter(task => task.id !== id)
 
         setTasks(updatedTasks);
-
-        setTaskInput("");
-        setEditId(null);
     }
+    
 
     const handleStatusChange = (id : number) => {
         const updatedTasks = tasks.map ((task) => task.id === id ? {...task,completed : !task.completed} : task);
         setTasks(updatedTasks);
 
+        setTaskInput("");
+        setEditId(null);
     }
-
+        
+        
+    
     useEffect(() => {
         localStorage.setItem("tasks",JSON.stringify(tasks))
     },[tasks])
