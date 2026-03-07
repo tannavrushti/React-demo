@@ -16,7 +16,14 @@ function Todo() {
       return  savedTasks ? JSON.parse(savedTasks):[]  
     })
 
-  const handleAdd = () => {
+    const [mode ,setMode] = useState("light");
+     const changeMode = () => {
+        
+        setMode (mode === "light" ? "dark" :"light");
+    }
+         
+          
+    const handleAdd = () => {
       if(taskInput.trim() === "") return;
 
      if(editId !== null) {
@@ -46,6 +53,9 @@ function Todo() {
         const updatedTasks = tasks.filter(task => task.id !== id)
 
         setTasks(updatedTasks);
+
+        setTaskInput("");
+        setEditId(null);
     }
     
 
@@ -65,11 +75,13 @@ function Todo() {
 
     
     return ( 
-      <div className="min-h-screen  bg-gray-100 flex justify-center p-4"> 
-         <div className="bg-white p-6 rounded-xl w-full max-w-lg">
+      <div className={`min-h-screen  bg-gray-300 flex justify-center items-start p-4 ${mode === "dark" ? "bg-black text-white" : "bg-white text-black"}`}> 
+         <div className={`"bg-white p-8 rounded-xl w-full max-w-2xl shadow-md" ${mode === "dark" ? "bg-gray-800":"bg-white"}`}>
+             
+             <button onClick={changeMode} className=' bg-blue-500 text-bold ml-auto px-2 py-2'>Mode</button>
              <h1 className=" text-2xl font-bold mb-4 text-center">To-do Component</h1>
 
-              <form  onSubmit = {(e) => { e.preventDefault(); handleAdd();}} className='flex mb-4 gap-2'>
+              <form  onSubmit = {(e) => { e.preventDefault(); handleAdd();}} className='flex mb-4 text-black gap-2'>
                  <input type ='text' placeholder='Enter a task' value ={taskInput}
                  onChange={(e) => setTaskInput (e.target.value)} className='flex-1 p-2 border'/>
 
@@ -79,7 +91,7 @@ function Todo() {
                  </button>
                   
                 </form> 
-                <div className='flex justify-between items-center mt-4'>
+                <div className='flex justify-between items-center mt-2'>
                   <p>Total :{tasks.length}</p>
                   <p>pending:{tasks.filter(task => !task.completed).length}</p>
                   </div>
