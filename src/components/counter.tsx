@@ -27,8 +27,8 @@ export const Counter = () => {
                   <div className='text-5xl font-bold text-gray-600 mb-6'>Counter App<br></br>{count}</div>
                   
                     <div className='flex items-center justify-center my-4 gap-3'>
-                         <button onClick={increment} className='bg-blue-500  px-4  py-2'>Increse</button>
-                        <button onClick={decrement} className='bg-blue-500  px-4  py-2'>Decrese</button>
+                         <button onClick={increment} className='bg-blue-500  px-4  py-2'>Increase</button>
+                        <button onClick={decrement} className='bg-blue-500  px-4  py-2'>Decrease</button>
       
                     </div>
                     <div>
