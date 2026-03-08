@@ -2,8 +2,9 @@
 // import Datalist from './components/Datalist'
 // import Example from './components/Example'
 // import Effect from './components/Effect'
-import Todo from './components/To-Dolist'
-import './App.css'
+// import Todo from './components/To-Dolist'
+import Counter from './components/counter'
+import './App.css' 
 
  
 
@@ -19,7 +20,8 @@ function App() {
   
      <div>
       {/* <Effect /> */}
-      <Todo />
+      {/* <Todo /> */}
+      <Counter/>
       </div>
      
       
