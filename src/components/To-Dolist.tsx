@@ -1,9 +1,9 @@
 import {useState, useEffect} from 'react'
 
 type Task = {
-    title : string
-    id : number
-    completed : boolean
+    title : string;
+    id : number;
+    completed : boolean;
 }
 
 function Todo() {
@@ -14,13 +14,13 @@ function Todo() {
     const [tasks , setTasks]= useState<Task[]>(() =>{
     const savedTasks = localStorage.getItem("tasks")
       return  savedTasks ? JSON.parse(savedTasks):[]  
-    })
+    });
 
     const [mode ,setMode] = useState("light");
      const changeMode = () => {
         
         setMode (mode === "light" ? "dark" :"light");
-    }
+    };
          
           
     const handleAdd = () => {
@@ -38,45 +38,43 @@ function Todo() {
             }
 
            setTasks([...tasks,newTask])
-       }
+       };
      
         setTaskInput("")
-    }
+    };
 
     const handleEdit = (task : Task) => {
         setTaskInput(task.title)
         setEditId(task.id)
         
-    }
+    };
 
     const handleDelete = (id:number) => {
-        const updatedTasks = tasks.filter(task => task.id !== id)
-
+        const updatedTasks = tasks.filter((task)=> task.id !== id)
         setTasks(updatedTasks);
 
-        setTaskInput("");
-        setEditId(null);
-    }
+        
+        
+    };
     
 
     const handleStatusChange = (id : number) => {
         const updatedTasks = tasks.map ((task) => task.id === id ? {...task,completed : !task.completed} : task);
         setTasks(updatedTasks);
 
-        setTaskInput("");
         setEditId(null);
-    }
-        
+        setTaskInput("");
+    };
         
     
     useEffect(() => {
         localStorage.setItem("tasks",JSON.stringify(tasks))
-    },[tasks])
+    },[tasks]);
 
     
     return ( 
-      <div className={`min-h-screen  bg-gray-300 flex justify-center items-start p-4 ${mode === "dark" ? "bg-black text-white" : "bg-white text-black"}`}> 
-         <div className={`"bg-white p-8 rounded-xl w-full max-w-2xl shadow-md" ${mode === "dark" ? "bg-gray-800":"bg-white"}`}>
+      <div className={`min-h-screen bg-black-100 flex justify-center items-start p-4 ${mode === "dark" ? "bg-black text-white" : "bg-white text-black"}`}> 
+         <div className={`"bg-grey-300 p-8 rounded-xl w-full max-w-2xl shadow-md" ${mode === "dark" ? "bg-gray-800":"bg-white-100"}`}>
              
              <button onClick={changeMode} className=' bg-blue-500 text-bold ml-auto px-2 py-2'>Mode</button>
              <h1 className=" text-2xl font-bold mb-4 text-center">To-do Component</h1>
@@ -96,7 +94,7 @@ function Todo() {
                   <p>pending:{tasks.filter(task => !task.completed).length}</p>
                   </div>
              
-              {tasks.map (task => (
+              {tasks.map ((task) => (
                    <div key = {task.id} className='flex  justify-between bg-grey-50 p-3 mb-2 shadow-sm'>
                         <div  className='flex items-center gap-3'>
                           <input type="checkbox" checked={task.completed}
